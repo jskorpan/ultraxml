@@ -39,18 +39,13 @@ struct UXMLPARSER
   /* Options */
   int validation;
 
-  /* Private */
-  UXMLCHAR *start;
-  UXMLCHAR *end;
-
   const char *errorMessage;
   int errorCode;
 
   /* User */
   void *userdata;
-  UXMLDOCUMENT document;
 };
 
-UXMLDOCUMENT UXML_parse(const UXMLCHAR *stream, size_t cbStream, struct UXMLPARSER *parser);
+UXMLDOCUMENT UXML_parse(const UXMLCHAR *stream, struct UXMLPARSER *parser);
 
 #endif

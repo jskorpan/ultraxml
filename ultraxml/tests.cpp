@@ -271,7 +271,7 @@ int main (int argc, char **argv)
 
   while (GetTickCount () - tsStart < 1000)
   {
-    UXMLDocument *document = UXMLC_parse(&state, buffer, len, heap, cbHeap);
+    UXMLDocument *document = UXMLC_parse(&state, buffer, heap, cbHeap);
 
     //iterNode(&state, document->root);
     UXMLC_destroy(&state);

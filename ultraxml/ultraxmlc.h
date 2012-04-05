@@ -41,7 +41,6 @@ typedef struct __UXMLDocument
   UXMLNode *prolog;
   UXMLNode *doctype;
   UXMLNode *root;
-
 } UXMLDocument;
 
 typedef struct __UXMLSlab
@@ -58,7 +57,7 @@ typedef struct __UXMLState
   UXMLSlab *slab;
 } UXMLState;
 
-UXMLDocument *UXMLC_parse(UXMLState *state, const UXMLCHAR *stream, size_t cchStream, void *buffer, size_t cbBuffer);
+UXMLDocument *UXMLC_parse(UXMLState *state, const UXMLCHAR *stream, void *buffer, size_t cbBuffer);
 void UXMLC_destroy(UXMLState *state);
 
 #endif

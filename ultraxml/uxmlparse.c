@@ -622,14 +622,11 @@ static UXMLDOCUMENT parseDocument(struct UXMLPARSER *parser)
     break;
   } 
 
-  return parser->document;
+  return document;
 }
 
-UXMLDOCUMENT UXML_parse(const UXMLCHAR *stream, size_t cchStream, struct UXMLPARSER *parser)
+UXMLDOCUMENT UXML_parse(const UXMLCHAR *stream, struct UXMLPARSER *parser)
 {
-  parser->start = (UXMLCHAR *) stream; 
-  parser->offset = parser->start;
-  parser->end = parser->start + cchStream;
-
+  parser->offset = (UXMLCHAR *) stream; 
   return parseDocument(parser);
 }

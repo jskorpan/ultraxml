@@ -135,7 +135,7 @@ UXMLDOCUMENT UXMLCAPI_createDocument(struct UXMLPARSER *parser)
   return (UXMLDOCUMENT) reserve(parser, sizeof(UXMLDocument));
 }
 
-UXMLDocument *UXMLC_parse(UXMLState *state, const UXMLCHAR *stream, size_t cchStream, void *buffer, size_t cbBuffer)
+UXMLDocument *UXMLC_parse(UXMLState *state, const UXMLCHAR *stream, void *buffer, size_t cbBuffer)
 {
   struct UXMLPARSER parser;
   UXMLSlab *slab;
@@ -166,7 +166,7 @@ UXMLDocument *UXMLC_parse(UXMLState *state, const UXMLCHAR *stream, size_t cchSt
   state->slab = slab;
   parser.userdata = (void *) state;
     
-  return (UXMLDocument *) UXML_parse(stream, cchStream, &parser);
+  return (UXMLDocument *) UXML_parse(stream, &parser);
 }
 
 void UXMLC_destroy(UXMLState *state)
