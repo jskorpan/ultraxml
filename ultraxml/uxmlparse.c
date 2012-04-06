@@ -65,9 +65,11 @@ UINLINE static int stringCompare(const UXMLCHAR *s1, const UXMLCHAR *s2, int len
 
 UINLINE static int skipWhiteSpace(struct UXMLPARSER *parser)
 {
+  UXMLCHAR *offset = parser->offset;
+
   for (;;)
   {
-    switch (*parser->offset)
+    switch (*offset)
     {
     case '\0':
       return 0;
@@ -79,18 +81,21 @@ UINLINE static int skipWhiteSpace(struct UXMLPARSER *parser)
       break;
 
     default:
+      parser->offset = offset;
       return 1;
     }
 
-    parser->offset ++;
+    offset ++;
   }
 }
 
 UINLINE static int skipName(struct UXMLPARSER *parser)
 {
+  UXMLCHAR *offset = parser->offset;
+
   for (;;)
   {
-    switch(*parser->offset)
+    switch(*offset)
     {
     case '\0':
       return 0;
@@ -102,21 +107,24 @@ UINLINE static int skipName(struct UXMLPARSER *parser)
       case '/':
       case '>':
       case '=':
+        parser->offset = offset;
         return 1;
 
       default:
         break;
     }
 
-    parser->offset ++;
+    offset ++;
   }
 }
 
 UINLINE static int skipUntilWhiteSpaceOrEq(struct UXMLPARSER *parser)
 {
+  UXMLCHAR *offset = parser->offset;
+
   for (;;)
   {
-    switch(*parser->offset)
+    switch(*offset)
     {
       case '\0':
         return 0;
@@ -126,13 +134,14 @@ UINLINE static int skipUntilWhiteSpaceOrEq(struct UXMLPARSER *parser)
       case '\n':
       case '\t':
       case '=':
+        parser->offset = offset;
         return 1;
 
       default:
         break;
     }
 
-    parser->offset ++;
+    offset ++;
   }  
 
   return 0;
@@ -140,19 +149,22 @@ UINLINE static int skipUntilWhiteSpaceOrEq(struct UXMLPARSER *parser)
 
 UINLINE static int skipUntilEq(struct UXMLPARSER *parser)
 {
+  UXMLCHAR *offset = parser->offset;
+
   for (;;)
   {
-    switch(*parser->offset)
+    switch(*offset)
     {
     case '\0':
       return 0;
     case '=':
+      parser->offset = offset;
       return 1;
     default:
       break;
     }
 
-    parser->offset ++;
+    offset ++;
   }
 
   return 0;
@@ -160,56 +172,65 @@ UINLINE static int skipUntilEq(struct UXMLPARSER *parser)
 
 UINLINE static int skipUntilDoubleQuote(struct UXMLPARSER *parser)
 {
+  UXMLCHAR *offset = parser->offset;
+
   for (;;)
   {
-    switch(*parser->offset)
+    switch(*offset)
     {
     case '\0':
       return 0;
     case '\"':
+      parser->offset = offset;
       return 1;
     default:
       break;
     }
 
-    parser->offset ++;
+    offset ++;
   }
 }
 
 
 UINLINE static int skipUntilSingleQuote(struct UXMLPARSER *parser)
 {
+  UXMLCHAR *offset = parser->offset;
+
   for (;;)
   {
-    switch(*parser->offset)
+    switch(*offset)
     {
     case '\0':
       return 0;
     case '\'':
+      parser->offset = offset;
       return 1;
     default:
       break;
     }
 
-    parser->offset ++;
+    offset ++;
   }
 }
 
 UINLINE static int skipUntilLt(struct UXMLPARSER *parser)
 {
+  UXMLCHAR *offset = parser->offset;
+
   for (;;)
   {
-    switch(*parser->offset)
+    switch(*offset)
     {
     case '\0':
       return 0;
     case '<':
+      parser->offset = offset;
       return 1;
     default:
       break;
     }
 
-    parser->offset ++;
+    offset ++;
   }
 }
 
